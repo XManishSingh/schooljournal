@@ -15,8 +15,7 @@ public class ClassDetails {
     private String classCode;
     private String className;
     private int totalStudents;
-    @DBRef
-    private List<StudentDetails> studentDetails = new ArrayList<>();
-
+    @DBRef(lazy = false)
+    private List<SubjectDetails> subjects = new ArrayList<>();
 
 }

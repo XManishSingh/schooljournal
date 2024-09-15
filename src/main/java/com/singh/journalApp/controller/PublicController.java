@@ -2,6 +2,8 @@ package com.singh.journalApp.controller;
 
 import com.singh.journalApp.DTO.OTPValidationRequest;
 import com.singh.journalApp.DTO.UserRegistration;
+import com.singh.journalApp.entity.ClassDetails;
+import com.singh.journalApp.entity.SubjectDetails;
 import com.singh.journalApp.entity.User;
 import com.singh.journalApp.repositry.UserRepositry;
 import com.singh.journalApp.service.EmailService;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -87,5 +90,7 @@ public class PublicController {
         public void checkCache(){
             otpService.printAllCacheEntries();
         }
+
+
     }
 

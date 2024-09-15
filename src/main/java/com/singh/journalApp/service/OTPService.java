@@ -16,6 +16,8 @@ import java.util.UUID;
 @Service
 public class OTPService {
     @Autowired
+    private UserIdSequenceService userIdSequenceService;
+    @Autowired
     private CacheManager cacheManager;
     @Autowired
     private UserService userService;
@@ -42,6 +44,9 @@ public class OTPService {
 
                 if (providedOtp.equals(cachedUser.getOtp())) {
                     System.out.println("OTP validated successfully for UUID: " + uuid);
+                    long memberId = userIdSequenceService.getNextSequenceId("userIdSequence");
+                    System.out.println(memberId);
+                    cachedUser.setMemberId(memberId);
                     userService.saveEntry(cachedUser);
                     return true;
                 } else {

@@ -1,8 +1,12 @@
 package com.singh.journalApp.service;
 
+import com.singh.journalApp.entity.ClassDetails;
 import com.singh.journalApp.entity.JournalEntry;
+import com.singh.journalApp.entity.SubjectDetails;
 import com.singh.journalApp.entity.User;
+import com.singh.journalApp.repositry.ClassRepository;
 import com.singh.journalApp.repositry.JournalEntryRepositry;
+import com.singh.journalApp.repositry.SubjectRepository;
 import com.singh.journalApp.repositry.UserRepositry;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,10 @@ import java.util.UUID;
 public class UserService {
     @Autowired
     private UserRepositry userRepositry;
+    @Autowired
+    private SubjectRepository subjectRepository;
+    @Autowired
+    private ClassRepository classRepository;
     @Autowired
     private EmailService emailService;
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -105,5 +113,8 @@ public class UserService {
         }
 
     }
+
+
+
 
 }

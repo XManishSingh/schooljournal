@@ -1,23 +1,15 @@
 package com.singh.journalApp.entity;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection = "student_details")
-@Data
-public class StudentDetails {
-    @Id
+public class CreateStudentDetailsPayload {
     private long memberId;
     @NotBlank(message = "First Name is Required")
     private String firstName;
@@ -27,15 +19,13 @@ public class StudentDetails {
     @Size(message = "Phone No must be of 10 digits.")
     private String phone;
     private String sex;
-    @NotNull(message = "DOB is Required")
+    @NotBlank(message = "DOB is Required")
     private Date dob;
-    @NotNull(message = "Date of Enrollment is Required.")
+    @NotBlank(message = "Date of Enrollment is Required.")
     private Date enrollmentDate;
     private long rollNumber;
     @NotBlank(message = "Class is Required.")
     private String classCode;
-    private Address address = new Address();
-    private ParentDetails parentDetails = new ParentDetails();
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -66,6 +56,4 @@ public class StudentDetails {
             private String phone;
         }
     }
-    @DBRef
-    private ClassDetails classDetails;
 }

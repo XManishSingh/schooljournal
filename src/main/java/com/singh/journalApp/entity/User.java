@@ -36,6 +36,7 @@ public class User {
     private LocalDateTime tokenExpirationTime;
     private LocalDateTime passwordExpireDate;
     private String otp;
+    private Long memberId;
 
 
 }
