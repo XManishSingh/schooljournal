@@ -16,6 +16,7 @@ public class GetStudentResponse {
         private String classCode;
         private Address address;
         private ParentDetails parentDetails;
+        private ClassDetails classDetails;
         @Data
         public static class Address {
             private String street;

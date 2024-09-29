@@ -3,32 +3,27 @@ package com.singh.journalApp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-
 @Data
-@Document(collection = "marks-details")
-public class MarksDetails {
-    @Id
+public class StudentExamReport {
     private String id;
-    private long memberId;
     private String classCode;
+    private String className;
+    private long memberId;
+    private String studentName;
     private String examCode;
+    private String examName;
     @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class SubjectMarks {
+    public class SubjectMarks {
         private String subjectCode;
         private String subjectName;
         private int fullMarks;
         private int marksObtained;
         private double percentage;
     }
-    private List<SubjectMarks> subjectMarksList;
+    private List<MarksDetails.SubjectMarks> subjectMarksList;
     private int totalFullMarks;
     private int totalMarksObtained;
     private double overallPercentage;
-
 }

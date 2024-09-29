@@ -9,10 +9,15 @@ import com.singh.journalApp.repositry.UserRepositry;
 import com.singh.journalApp.service.EmailService;
 import com.singh.journalApp.service.OTPService;
 import com.singh.journalApp.service.UserService;
+import com.singh.journalApp.utilis.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -23,6 +28,8 @@ import java.util.UUID;
 @RequestMapping("/public")
 public class PublicController {
     @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
     private UserService userService;
     @Autowired
     private UserRepositry userRepositry;
@@ -30,10 +37,28 @@ public class PublicController {
     private EmailService emailService;
     @Autowired
     private OTPService otpService;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping("/health-check")
     public String healthCheck(){
         return "Ok";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user){
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
+            String jwt = jwtUtil.generateToken(userDetails.getUsername());
+            return new ResponseEntity<>(jwt, HttpStatus.OK);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/create-user")

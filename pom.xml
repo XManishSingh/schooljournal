@@ -95,7 +95,6 @@
             <artifactId>spring-context</artifactId>
             <version>6.1.12</version>
         </dependency>
-
     </dependencies>
 
     <build>

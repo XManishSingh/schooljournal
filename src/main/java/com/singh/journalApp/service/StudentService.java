@@ -45,7 +45,19 @@ public class StudentService {
         allStudentsDetails.setTotalPages(studentPage.getTotalPages());
         allStudentsDetails.setCurrentPage(studentPage.getNumber());
         allStudentsDetails.setTotalElements(studentPage.getTotalElements());
-
+        return allStudentsDetails;
+    }
+    public GetAllStudentsDetails getStudentsByClass(int page, int size, String classCode){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<StudentDetails>studentPage = studentRepository.findByClassCode(classCode, pageable);
+        List<GetStudentResponse> studentResponseList = studentPage.stream()
+                .map(student -> modelMapper.map(student, GetStudentResponse.class))
+                .toList();
+        GetAllStudentsDetails allStudentsDetails = new GetAllStudentsDetails();
+        allStudentsDetails.setStudentDetailsList(studentResponseList);
+        allStudentsDetails.setTotalPages(studentPage.getTotalPages());
+        allStudentsDetails.setCurrentPage(studentPage.getNumber());
+        allStudentsDetails.setTotalElements(studentPage.getTotalElements());
         return allStudentsDetails;
     }
 
