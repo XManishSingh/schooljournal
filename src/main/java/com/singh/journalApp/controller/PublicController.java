@@ -57,7 +57,7 @@ public class PublicController {
             return new ResponseEntity<>(jwt, HttpStatus.OK);
 
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
