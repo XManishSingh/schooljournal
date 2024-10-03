@@ -49,7 +49,7 @@ public class UserService {
         Sort sort = Sort.by(Sort.Direction.ASC, "userName");
         return userRepositry.findAll(sort);
     }
-        public Optional<User> findById(ObjectId id){
+    public Optional<User> findById(ObjectId id){
         return userRepositry.findById(id);
     }
     public void deleteById(ObjectId id){
@@ -65,10 +65,11 @@ public class UserService {
         String token = UUID.randomUUID().toString();
         user.setResetPasswordToken(token);
         user.setTokenExpirationTime(LocalDateTime.now().plusMinutes(30));
-
         userRepositry.save(user);
-
-        emailService.sendResetMail(user.getEmail(), token);
+        String resetLink = "https://yourapp.com/reset-password?token=" + token;
+        String emailBody = "Hi \nTo reset your password, click the link below:\n" + resetLink;
+        String subject = "Password Reset Request";
+        emailService.sendEmailGeneric(user.getEmail(), subject, emailBody);
     }
     public void resetPassword(String token, String newPassword) {
         User user = userRepositry.findByResetPasswordToken(token);
@@ -83,7 +84,9 @@ public class UserService {
         user.setTokenExpirationTime(null);
 
         userRepositry.save(user);
-        emailService.sendResetDone(user.getEmail());
+        String subject = "Password Reset Successfully";
+        String emailBody = "Hi" + user.getUserName() + "\n Your Password has been reset Successfully";
+        emailService.sendEmailGeneric(user.getEmail(), subject, emailBody);
     }
     public List<User> getUserPasswordNearToExpire(){
         LocalDateTime limit = LocalDateTime.now().plusDays(15);
@@ -107,8 +110,11 @@ public class UserService {
         LocalDateTime limit = LocalDateTime.now().plusDays(15);
         List<User> entry = userRepositry.findUsersExpiredBefore(limit);
         System.out.println(entry);
+        String subject = "Password ExpireAlert";
         for (User row : entry){
-            emailService.sendExpireAlert(row.getEmail(), row.getUserName());
+            String emailBody = "Hi "+ row.getUserName() + "\nYour Password is About to Expire please Reset it as soon as possible.";
+
+            emailService.sendEmailGeneric(row.getEmail(), subject, emailBody);
             System.out.println(row.getEmail());
         }
 

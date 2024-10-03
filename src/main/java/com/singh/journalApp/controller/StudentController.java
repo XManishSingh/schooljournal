@@ -1,6 +1,6 @@
 package com.singh.journalApp.controller;
 
-import com.singh.journalApp.entity.GetAllStudentsDetails;
+import com.singh.journalApp.DTO.GetAllStudentsDetails;
 import com.singh.journalApp.entity.StudentDetails;
 import com.singh.journalApp.service.StudentService;
 import com.singh.journalApp.service.UserIdSequenceService;
@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

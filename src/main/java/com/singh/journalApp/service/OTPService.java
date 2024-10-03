@@ -9,9 +9,9 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.cache.Cache;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
-
 
 @Service
 public class OTPService {
@@ -22,8 +22,7 @@ public class OTPService {
     @Autowired
     private UserService userService;
     @CachePut(value = "otpCache", key = "#uuid")
-    public User storeUserWithOtp(String uuid, String otp, User user){
-        user.setOtp(otp);
+    public UserRegistration storeUserWithOtp(String uuid, UserRegistration user){
         return user;
     }
     @Cacheable(value = "otpCache", key = "#uuid")
@@ -33,21 +32,21 @@ public class OTPService {
     @CacheEvict(value = "otpCache", key = "#uuid")
     public void removeCachedUserWithOTP(String uuid) {
     }
+    @Transactional
     public boolean validateOtp(String uuid, String providedOtp) {
         printAllCacheEntries();
         Cache cache = cacheManager.getCache("otpCache");
-
         if (cache != null) {
             User cachedUser = cache.get(uuid, User.class);
             if (cachedUser != null) {
                 System.out.println("User found in cache: " + cachedUser);
-
                 if (providedOtp.equals(cachedUser.getOtp())) {
                     System.out.println("OTP validated successfully for UUID: " + uuid);
                     long memberId = userIdSequenceService.getNextSequenceId("userIdSequence");
                     System.out.println(memberId);
                     cachedUser.setMemberId(memberId);
                     userService.saveEntry(cachedUser);
+                    removeCachedUserWithOTP(uuid);
                     return true;
                 } else {
                     System.out.println("Invalid OTP provided.");
@@ -58,9 +57,9 @@ public class OTPService {
         } else {
             System.out.println("Cache not found.");
         }
-
         return false;
     }
+
     public void printAllCacheEntries() {
         Cache cache = cacheManager.getCache("otpCache");
         if (cache != null && cache.getNativeCache() instanceof com.github.benmanes.caffeine.cache.Cache) {

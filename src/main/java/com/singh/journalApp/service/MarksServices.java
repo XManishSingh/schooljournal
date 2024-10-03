@@ -1,9 +1,9 @@
 package com.singh.journalApp.service;
 
-import com.singh.journalApp.entity.GetExamReportRequest;
+import com.singh.journalApp.DTO.GetExamReportRequest;
 import com.singh.journalApp.entity.MarksDetails;
 import com.singh.journalApp.entity.StudentDetails;
-import com.singh.journalApp.entity.StudentExamReport;
+import com.singh.journalApp.DTO.StudentExamReport;
 import com.singh.journalApp.repositry.MarksRepository;
 import com.singh.journalApp.repositry.StudentRepository;
 import org.modelmapper.ModelMapper;

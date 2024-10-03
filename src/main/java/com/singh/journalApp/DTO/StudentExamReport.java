@@ -1,8 +1,7 @@
-package com.singh.journalApp.entity;
+package com.singh.journalApp.DTO;
 
-import lombok.AllArgsConstructor;
+import com.singh.journalApp.entity.MarksDetails;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 @Data
