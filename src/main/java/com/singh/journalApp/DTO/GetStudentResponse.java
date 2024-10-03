@@ -1,5 +1,6 @@
-package com.singh.journalApp.entity;
+package com.singh.journalApp.DTO;
 
+import com.singh.journalApp.entity.ClassDetails;
 import lombok.Data;
 
 import java.util.Date;

@@ -3,6 +3,7 @@ package com.singh.journalApp.DTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 @Data
 public class UserRegistration {
@@ -12,6 +13,7 @@ public class UserRegistration {
     private String password;
     @Email
     @NotBlank(message = "Email is Required.")
+    @Indexed(unique = true)
     private String email;
     private String otp;
 }

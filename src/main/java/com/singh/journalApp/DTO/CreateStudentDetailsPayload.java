@@ -1,5 +1,6 @@
-package com.singh.journalApp.entity;
+package com.singh.journalApp.DTO;
 
+import com.singh.journalApp.entity.StudentDetails;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

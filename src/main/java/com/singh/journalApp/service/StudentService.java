@@ -1,5 +1,7 @@
 package com.singh.journalApp.service;
 
+import com.singh.journalApp.DTO.GetAllStudentsDetails;
+import com.singh.journalApp.DTO.GetStudentResponse;
 import com.singh.journalApp.entity.*;
 import com.singh.journalApp.repositry.ClassRepository;
 import com.singh.journalApp.repositry.StudentRepository;
@@ -10,12 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
