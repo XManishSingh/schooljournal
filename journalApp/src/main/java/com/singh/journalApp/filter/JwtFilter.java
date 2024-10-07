@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
-        response.addHeader("admin", "vipul");
+        response.addHeader("admin", "manish");
         chain.doFilter(request, response);
     }
 }

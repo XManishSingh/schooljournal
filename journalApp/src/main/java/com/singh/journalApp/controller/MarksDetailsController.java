@@ -17,7 +17,6 @@ public class MarksDetailsController {
     @GetMapping("/student")
     public ResponseEntity<StudentExamReport> getStudentExamReport(@RequestBody GetExamReportRequest getExamReportRequest){
        return marksServices.getStudentExamReport(getExamReportRequest);
-
     }
     @PostMapping("/save-marks")
     public ResponseEntity<?> saveStudentMarks(@RequestBody MarksDetails marksDetails){

@@ -30,8 +30,10 @@ public class SpringSecurity {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
+                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/webjars/**").permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/journal/**")).authenticated()
                                 .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated()
+                                .requestMatchers(new AntPathRequestMatcher("/students/**")).authenticated()
                                 .anyRequest().permitAll()
 
                 )

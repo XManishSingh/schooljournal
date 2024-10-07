@@ -4,6 +4,7 @@ import com.singh.journalApp.DTO.GetAllStudentsDetails;
 import com.singh.journalApp.entity.StudentDetails;
 import com.singh.journalApp.service.StudentService;
 import com.singh.journalApp.service.UserIdSequenceService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @RestController("/restServices")
 @RequestMapping("/students")
+@Tag(name="Student API's")
 public class StudentController {
     @Autowired
     private StudentService studentService;

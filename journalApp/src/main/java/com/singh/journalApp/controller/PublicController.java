@@ -8,6 +8,7 @@ import com.singh.journalApp.service.EmailService;
 import com.singh.journalApp.service.OTPService;
 import com.singh.journalApp.service.UserService;
 import com.singh.journalApp.utilis.JwtUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/public")
+@Tag(name = "Public API's")
 public class PublicController {
     @Autowired
     private AuthenticationManager authenticationManager;

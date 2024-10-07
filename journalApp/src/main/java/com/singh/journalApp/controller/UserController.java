@@ -3,6 +3,8 @@ package com.singh.journalApp.controller;
 import com.singh.journalApp.entity.User;
 import com.singh.journalApp.repositry.UserRepositry;
 import com.singh.journalApp.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User API's", description = "Read, Update, Delete")
 public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepositry userRepositry;
     @GetMapping
+    @Operation(summary = "Get all user details")
     public List<User> getAllUsers(){
         return userService.getAll();
     }

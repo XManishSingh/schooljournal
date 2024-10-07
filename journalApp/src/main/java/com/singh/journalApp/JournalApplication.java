@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableCaching
 public class JournalApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(JournalApplication.class, args);
 	}
